@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
+import { FaEnvelope, FaLock, FaArrowLeft } from 'react-icons/fa'
 
 export default function Login() {
   const router = useRouter()
@@ -46,32 +47,38 @@ export default function Login() {
             <span className="text-white font-bold text-2xl">H</span>
           </div>
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Admin Login</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Haris Mobile Phones & Accessories</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Haris Mobile Communication</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              <FaEnvelope className="inline mr-2 text-blue-500" />
+              Email
+            </label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
               placeholder="admin@harismobiles.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+              <FaLock className="inline mr-2 text-blue-500" />
+              Password
+            </label>
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
               placeholder="••••••••"
             />
           </div>
@@ -79,14 +86,23 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition disabled:opacity-50"
+            className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition disabled:opacity-50 hover:scale-[1.02]"
           >
             {loading ? 'Logging in...' : 'Sign In'}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
-          <Link href="/" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">← Back to Store</Link>
+        {/* ✅ Forgot Password Link */}
+        <div className="mt-4 text-center">
+          <Link href="/forgot-password" className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+            Forgot Password?
+          </Link>
+        </div>
+
+        <div className="mt-2 text-center">
+          <Link href="/" className="text-sm text-gray-500 dark:text-gray-400 hover:underline inline-flex items-center gap-1">
+            <FaArrowLeft className="text-xs" /> Back to Store
+          </Link>
         </div>
       </div>
     </div>

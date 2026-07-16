@@ -2,10 +2,12 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { FaSearch, FaShoppingCart, FaHeart, FaUser, FaPhone, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
+import { FaSearch, FaShoppingCart, FaHeart, FaUser } from 'react-icons/fa'
+import { useCart } from '@/hooks/useCart'
 
 export default function Header() {
   const [search, setSearch] = useState('')
+  const { cartCount } = useCart()
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
@@ -13,15 +15,9 @@ export default function Header() {
         {/* Top Bar */}
         <div className="hidden md:flex justify-between items-center text-xs text-gray-500 py-1.5 border-b border-gray-100">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5">
-              <FaPhone className="text-blue-600 text-[10px]" /> +92 344 9848193
-            </span>
-            <span className="flex items-center gap-1.5">
-              <FaMapMarkerAlt className="text-blue-600 text-[10px]" /> Main Bazar, Lassan Nawab
-            </span>
-            <span className="flex items-center gap-1.5">
-              <FaClock className="text-blue-600 text-[10px]" /> Mon-Sat 9AM - 9PM
-            </span>
+            <span className="flex items-center gap-1.5">📞 +92 344 9848193</span>
+            <span className="flex items-center gap-1.5">📍 Main Bazar, Lassan Nawab</span>
+            <span className="flex items-center gap-1.5">🕒 Mon-Sat 9AM - 9PM</span>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/login" className="hover:text-blue-600 transition">Sign In</Link>
@@ -31,24 +27,19 @@ export default function Header() {
 
         {/* Main Header */}
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* ============================================================
-              LOGO - Haris Mobile (BOLD COLORS)
-              ============================================================ */}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
             <div className="w-11 h-11 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
               <span className="text-white font-bold text-2xl">H</span>
             </div>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                {/* ✅ Haris - Blue Gradient */}
-                <span className="text-2xl md:text-3xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="text-2xl md:text-3xl font-extrabold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                   Haris
                 </span>
-                {/* ✅ Mobile - Bright Blue Color */}
-                <span className="text-2xl md:text-3xl font-extrabold text-blue-700 dark:text-blue-400 leading-tight tracking-tight">
+                <span className="text-2xl md:text-3xl font-extrabold text-blue-700 dark:text-blue-400">
                   Mobile
                 </span>
-                {/* ✅ HMS Badge */}
                 <span className="relative">
                   <span className="inline-block px-2.5 py-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-[10px] font-extrabold rounded-lg tracking-wider shadow-md shadow-blue-500/30">
                     HMS
@@ -78,31 +69,24 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-1 md:gap-2">
-            <Link
-              href="/wishlist"
-              className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
-            >
+            <Link href="/wishlist" className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
               <FaHeart className="text-gray-600 text-lg hover:text-red-500 transition-colors" />
               <span className="absolute top-0 right-0 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-lg shadow-red-500/30">
                 0
               </span>
             </Link>
 
-            <Link
-              href="/cart"
-              className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
-            >
+            {/* ✅ CART WITH COUNT */}
+            <Link href="/cart" className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
               <FaShoppingCart className="text-gray-600 text-lg hover:text-blue-600 transition-colors" />
-              <span className="absolute top-0 right-0 bg-blue-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30">
-                0
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30">
+                  {cartCount}
+                </span>
+              )}
             </Link>
 
-            {/* Sign In Button */}
-            <Link
-              href="/login"
-              className="ml-1 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all hover:scale-105 flex items-center gap-2"
-            >
+            <Link href="/login" className="ml-1 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all hover:scale-105 flex items-center gap-2">
               <FaUser className="text-sm" /> Sign In
             </Link>
           </div>

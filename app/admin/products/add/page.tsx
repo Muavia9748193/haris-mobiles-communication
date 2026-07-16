@@ -21,7 +21,7 @@ export default function AddProduct() {
   })
 
   const categories = ['Samsung', 'Apple', 'Vivo', 'Oppo', 'Infinix', 'Tecno', 'Xiaomi', 'Realme', 'Accessories']
-  const brands = ['Samsung', 'Apple', 'Vivo', 'Oppo', 'Infinix', 'Tecno', 'Xiaomi', 'Realme', 'OnePlus', 'Google']
+  const brands = ['Samsung', 'Apple', 'Vivo', 'Oppo', 'Infinix', 'Tecno', 'Xiaomi', 'Realme', 'OnePlus', 'Google', 'Others']
 
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target
