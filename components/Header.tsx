@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { FaSearch, FaShoppingCart, FaHeart, FaUser } from 'react-icons/fa'
+import { FaSearch, FaShoppingCart, FaUser } from 'react-icons/fa'
 import { useCart } from '@/hooks/useCart'
 
 export default function Header() {
@@ -15,13 +15,15 @@ export default function Header() {
         {/* Top Bar */}
         <div className="hidden md:flex justify-between items-center text-xs text-gray-500 py-1.5 border-b border-gray-100">
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5">📞 +92 344 9848193</span>
-            <span className="flex items-center gap-1.5">📍 Main Bazar, Lassan Nawab</span>
-            <span className="flex items-center gap-1.5">🕒 Mon-Sat 9AM - 9PM</span>
+            <span>📞 +92 344 9848193</span>
+            <span>📍 Main Bazar, Lassan Nawab</span>
+            <span>🕒 Mon-Sat 9AM - 9PM</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/login" className="hover:text-blue-600 transition">Sign In</Link>
-            <Link href="/register" className="hover:text-blue-600 transition">Register</Link>
+            {/* ✅ SIRF ADMIN LOGIN - No user login/register */}
+            <Link href="/login" className="hover:text-blue-600 transition font-medium">
+              🔐 Admin Login
+            </Link>
           </div>
         </div>
 
@@ -69,14 +71,6 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-1 md:gap-2">
-            <Link href="/wishlist" className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <FaHeart className="text-gray-600 text-lg hover:text-red-500 transition-colors" />
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-lg shadow-red-500/30">
-                0
-              </span>
-            </Link>
-
-            {/* ✅ CART WITH COUNT */}
             <Link href="/cart" className="relative p-2 hover:bg-gray-100 rounded-full transition-colors">
               <FaShoppingCart className="text-gray-600 text-lg hover:text-blue-600 transition-colors" />
               {cartCount > 0 && (
@@ -86,8 +80,12 @@ export default function Header() {
               )}
             </Link>
 
-            <Link href="/login" className="ml-1 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all hover:scale-105 flex items-center gap-2">
-              <FaUser className="text-sm" /> Sign In
+            {/* ✅ SIRF ADMIN LOGIN BUTTON */}
+            <Link
+              href="/login"
+              className="ml-1 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/30 transition-all hover:scale-105 flex items-center gap-2"
+            >
+              <FaUser className="text-sm" /> Admin
             </Link>
           </div>
         </div>

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase'
-import { FaBox, FaShoppingBag, FaUsers, FaExclamationTriangle } from 'react-icons/fa'
 
 export default function DashboardPage() {
   const [stats, setStats] = useState({
@@ -60,30 +59,26 @@ export default function DashboardPage() {
     )
   }
 
-  const statCards = [
-    { icon: FaBox, label: 'Total Products', value: stats.products, color: 'blue' },
-    { icon: FaShoppingBag, label: 'Total Orders', value: stats.orders, color: 'green' },
-    { icon: FaUsers, label: 'Customers', value: stats.customers, color: 'purple' },
-    { icon: FaExclamationTriangle, label: 'Low Stock', value: stats.lowStock, color: 'red' },
-  ]
-
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">Dashboard</h1>
+      <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">📊 Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {statCards.map((stat) => (
-          <div key={stat.label} className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</p>
-                <p className="text-3xl font-bold text-gray-800 dark:text-white mt-1">{stat.value}</p>
-              </div>
-              <div className={`w-12 h-12 bg-${stat.color}-100 dark:bg-${stat.color}-900/30 rounded-full flex items-center justify-center`}>
-                <stat.icon className={`text-${stat.color}-600 dark:text-${stat.color}-400 text-xl`} />
-              </div>
-            </div>
-          </div>
-        ))}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+          <p className="text-sm text-gray-500">Total Products</p>
+          <p className="text-3xl font-bold text-blue-600">{stats.products}</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+          <p className="text-sm text-gray-500">Total Orders</p>
+          <p className="text-3xl font-bold text-green-600">{stats.orders}</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+          <p className="text-sm text-gray-500">Customers</p>
+          <p className="text-3xl font-bold text-purple-600">{stats.customers}</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-6">
+          <p className="text-sm text-gray-500">Low Stock</p>
+          <p className="text-3xl font-bold text-red-600">{stats.lowStock}</p>
+        </div>
       </div>
     </div>
   )
