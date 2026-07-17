@@ -19,10 +19,23 @@ interface Product {
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const { addToCart } = useCart()  // ✅ IMPORTANT!
+  const { addToCart } = useCart()
 
   useEffect(() => {
     fetchProducts()
+  }, [])
+
+  // ✅ Service Worker Register
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then((registration) => {
+          console.log('✅ Service Worker registered:', registration)
+        })
+        .catch((error) => {
+          console.log('❌ Service Worker registration failed:', error)
+        })
+    }
   }, [])
 
   const fetchProducts = async () => {
@@ -58,7 +71,7 @@ export default function Home() {
   return (
     <div className="bg-white dark:bg-gray-950">
       
-      {/* ===== HERO SECTION ===== */}
+      {/* HERO SECTION */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white min-h-[85vh] flex items-center">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-[-30%] left-[-10%] w-[500px] h-[500px] rounded-full bg-blue-500 blur-3xl"></div>
@@ -116,7 +129,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== FEATURED PRODUCTS ===== */}
+      {/* PRODUCTS */}
       <section className="container mx-auto px-4 py-16">
         <div className="flex flex-col md:flex-row justify-between items-end mb-10">
           <div>
@@ -219,7 +232,6 @@ export default function Home() {
                         )}
                       </div>
 
-                      {/* ✅ ADD TO CART BUTTON - WORKING */}
                       <button
                         onClick={() => addToCart(product)}
                         className="w-full mt-4 py-2.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-xl font-medium text-sm hover:bg-blue-600 hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20"
