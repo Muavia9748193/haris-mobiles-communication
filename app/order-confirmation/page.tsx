@@ -1,21 +1,20 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { FaCheckCircle, FaWhatsapp, FaHome } from 'react-icons/fa'
 
-export default function OrderConfirmation() {
+// ✅ Component that uses useSearchParams — wrapped in Suspense
+function OrderConfirmationContent() {
   const searchParams = useSearchParams()
   const [orderNumber, setOrderNumber] = useState('')
 
   useEffect(() => {
-    // Get order number from URL params if available
     const order = searchParams?.get('order')
     if (order) {
       setOrderNumber(order)
     } else {
-      // Generate a temporary order number if not provided
       setOrderNumber('ORD-' + Date.now())
     }
   }, [searchParams])
@@ -67,5 +66,23 @@ export default function OrderConfirmation() {
         </div>
       </div>
     </div>
+  )
+}
+
+// ✅ Main component with Suspense boundary
+export default function OrderConfirmation() {
+  return (
+    <Suspense
+      fallback={
+        <div className="container mx-auto px-4 py-16 text-center">
+          <div className="max-w-2xl mx-auto">
+            <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-gray-500">Loading order confirmation...</p>
+          </div>
+        </div>
+      }
+    >
+      <OrderConfirmationContent />
+    </Suspense>
   )
 }
