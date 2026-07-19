@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 }
 
-// ✅ VIEWPORT ALAG SE EXPORT KAREIN
 export const viewport: Viewport = {
   themeColor: '#2563eb',
   width: 'device-width',
